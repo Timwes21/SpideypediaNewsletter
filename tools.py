@@ -4,8 +4,7 @@ from google.ai.generativelanguage_v1beta.types import Tool as GenAITool
 import models
 from bs4 import BeautifulSoup
 import os
-from utils.weaviate_client import add_to_store
-from helper_functions import send_to_agent, get_date, tavily_search
+from utils.helper_functions import send_to_agent, get_date, tavily_search
 from utils.mongodb import publish_to_mongo
 import requests
 
@@ -17,7 +16,6 @@ import requests
 def publish_article(article, topic):
     date_details = get_date()
     publish_to_mongo(article, topic, date_details)
-    add_to_store(article, date_details["date"], topic)
 
 
 @tool("get_possible_topics", description="gets links and resources that will help decide the topic")
